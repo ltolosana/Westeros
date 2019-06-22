@@ -17,6 +17,8 @@
 		60821F2F22BE3BA900AF1476 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60821F2E22BE3BA900AF1476 /* SeasonTests.swift */; };
 		60821F3122BE40A400AF1476 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60821F3022BE40A400AF1476 /* Season.swift */; };
 		60821F3722BE4D6A00AF1476 /* Date+FromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60821F3622BE4D6A00AF1476 /* Date+FromString.swift */; };
+		60821F3922BE502A00AF1476 /* EpisodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60821F3822BE502A00AF1476 /* EpisodeTests.swift */; };
+		60821F3B22BE546800AF1476 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60821F3A22BE546800AF1476 /* Episode.swift */; };
 		6086091D22B2DD0A005A2BD4 /* HouseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086091B22B2DD0A005A2BD4 /* HouseDetailViewController.swift */; };
 		6086091E22B2DD0A005A2BD4 /* HouseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6086091C22B2DD0A005A2BD4 /* HouseDetailViewController.xib */; };
 		6086092122B2F8BD005A2BD4 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086092022B2F8BD005A2BD4 /* UIViewController+Navigation.swift */; };
@@ -54,6 +56,8 @@
 		60821F2E22BE3BA900AF1476 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
 		60821F3022BE40A400AF1476 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		60821F3622BE4D6A00AF1476 /* Date+FromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FromString.swift"; sourceTree = "<group>"; };
+		60821F3822BE502A00AF1476 /* EpisodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTests.swift; sourceTree = "<group>"; };
+		60821F3A22BE546800AF1476 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		6086091B22B2DD0A005A2BD4 /* HouseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailViewController.swift; sourceTree = "<group>"; };
 		6086091C22B2DD0A005A2BD4 /* HouseDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseDetailViewController.xib; sourceTree = "<group>"; };
 		6086092022B2F8BD005A2BD4 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				60C94C9022B031960014744A /* PersonTests.swift */,
 				6086092222B2FB38005A2BD4 /* RepositoryTests.swift */,
 				60821F2E22BE3BA900AF1476 /* SeasonTests.swift */,
+				60821F3822BE502A00AF1476 /* EpisodeTests.swift */,
 			);
 			path = WesterosTests;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				60C94C8E22B0301A0014744A /* Sigil.swift */,
 				60C94C9222B0324B0014744A /* Person.swift */,
 				60821F3022BE40A400AF1476 /* Season.swift */,
+				60821F3A22BE546800AF1476 /* Episode.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				60528D6C22B999CB00C21017 /* MemberListViewController.swift in Sources */,
 				60C94C8D22B02CAA0014744A /* House.swift in Sources */,
 				60528D6822B9898A00C21017 /* HouseListViewController.swift in Sources */,
+				60821F3B22BE546800AF1476 /* Episode.swift in Sources */,
 				60C0E13422AF0B2300E72CD3 /* AppDelegate.swift in Sources */,
 				60528D6122B96C9B00C21017 /* WikiViewController.swift in Sources */,
 				60821F3722BE4D6A00AF1476 /* Date+FromString.swift in Sources */,
@@ -319,6 +326,7 @@
 				60821F2F22BE3BA900AF1476 /* SeasonTests.swift in Sources */,
 				60C0E15422AF11E400E72CD3 /* HouseTests.swift in Sources */,
 				60C94C9122B031960014744A /* PersonTests.swift in Sources */,
+				60821F3922BE502A00AF1476 /* EpisodeTests.swift in Sources */,
 				6086092322B2FB38005A2BD4 /* RepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
