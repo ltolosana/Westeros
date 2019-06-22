@@ -27,6 +27,7 @@
 		60C94C8F22B0301A0014744A /* Sigil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C94C8E22B0301A0014744A /* Sigil.swift */; };
 		60C94C9122B031960014744A /* PersonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C94C9022B031960014744A /* PersonTests.swift */; };
 		60C94C9322B0324B0014744A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C94C9222B0324B0014744A /* Person.swift */; };
+		60CDB35022BC3A8C005E0073 /* NotificationName+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		60C94C8E22B0301A0014744A /* Sigil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sigil.swift; sourceTree = "<group>"; };
 		60C94C9022B031960014744A /* PersonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTests.swift; sourceTree = "<group>"; };
 		60C94C9222B0324B0014744A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Addition.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				6086092022B2F8BD005A2BD4 /* UIViewController+Navigation.swift */,
+				60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6086092622B2FC33005A2BD4 /* Repository.swift in Sources */,
+				60CDB35022BC3A8C005E0073 /* NotificationName+Addition.swift in Sources */,
 				6086092122B2F8BD005A2BD4 /* UIViewController+Navigation.swift in Sources */,
 				6086091D22B2DD0A005A2BD4 /* HouseDetailViewController.swift in Sources */,
 				60C94C8F22B0301A0014744A /* Sigil.swift in Sources */,

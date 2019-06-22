@@ -32,8 +32,10 @@ class MemberListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // LMT - Hecho por mi
-        tableView.delegate = self
+        // Xandre: OJO. No olvidarse de asignar el dataSource
         tableView.dataSource = self
+//        tableView.delegate = self
+
 
     }
 
@@ -51,35 +53,65 @@ class MemberListViewController: UIViewController {
 // el controlador es que sera el delegado
 
 // LMT - Hecho por mi
-extension MemberListViewController: UITableViewDataSource, UITableViewDelegate {
+//extension MemberListViewController: UITableViewDataSource, UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return model.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cellId = "memberCell"
+//
+//        // Descubrir cual es la la persona que tenemos que mostrar
+//        let person = model[indexPath.row]
+//
+//        // Crear una celda
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
+//
+//        // Sincronizar modelo(house) - vista(celda)
+//        cell.textLabel?.text = person.name
+//        cell.detailTextLabel?.text = person.alias
+//        cell.imageView?.image = person.house.sigil.image
+//
+//        // Devolver la celda
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 60
+//    }
+//
+//}
 
+// Lo que ha hecho Xandre
+
+// MARK: - Table View data source
+extension MemberListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
-        let cellId = "memberCell"
         
-        // Descubrir cual es la la persona que tenemos que mostrar
+        let cellId = "PersonCell"
+        
+        // Descubrir que persona tengo que mostrar
         let person = model[indexPath.row]
         
-        // Crear una celda
+        // Crear la celda
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
         
-        // Sincronizar modelo(house) - vista(celda)
-        cell.textLabel?.text = person.name
+        // Sincronizar model-view
+        cell.textLabel?.text = person.fullName
         cell.detailTextLabel?.text = person.alias
-        cell.imageView?.image = person.house.sigil.image
-    
+        
+        
         // Devolver la celda
         return cell
+        
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-
+    
+    
 }
-
-

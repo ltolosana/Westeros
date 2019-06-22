@@ -17,7 +17,7 @@ final class WikiViewController: UIViewController {
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
     // MARK: - Properties
-    private let model: House
+    private var model: House
     
     // MARK: - Initialization
     init( model: House) {
@@ -41,9 +41,60 @@ final class WikiViewController: UIViewController {
         webView.navigationDelegate = self
         
         syncModelWithView()
+        // Siempre que nos subscribimos, debemos desubscribirnos
+        subscribeToNotifications()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeNotifications()
     }
 
 }
+
+extension WikiViewController {
+    private func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+        // Nos damos de alta en las notifications
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(houseDidChange),
+            name: .houseDidNotificationName,
+            object: nil // Se refiere al objeto que envia la notification
+        )
+    }
+    
+    private func unsubscribeNotifications() {
+        // Nos damos de baja de las notificaciones
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
+    @objc private func houseDidChange(notification: Notification) {
+        // Averiguar la casa
+        // teneos dos formas de desempaquetar el UserInfo que es opcional y usamo la forma de guard
+//        if let dictionary = notification.userInfo {
+//            //Haces cosas aqui con el dictionary
+//        }
+        guard let dictionary = notification.userInfo else {
+            return
+        }
+        
+        // Casting opcional
+        guard let house = dictionary[HouseListViewController.Constants.houseKey] as? House else {
+            return
+        }
+        
+        // Actualizar el modelo
+        model = house
+        
+        // Sincronizar modelo y vista
+        syncModelWithView()
+        
+    }
+}
+
 
 extension WikiViewController {
     private func syncModelWithView() {

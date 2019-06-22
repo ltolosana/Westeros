@@ -36,11 +36,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        tabBarController.viewControllers = houses
 //            .map { HouseDetailViewController(model: $0).wrappedInNavigation() }
         
+        // Creamos los controladores
         let houseListViewController = HouseListViewController(model: houses)
         
+        let lastSelectedHouse = houseListViewController.lastSelectedHouse()
+        let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse)
+        
+        // Asignamos delegados
+        houseListViewController.delegate = houseDetailViewController
+        
+        // Los envolvemos en Navigations
+        let houseListNavigation = houseListViewController.wrappedInNavigation()
+        let houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
+        
+        // Creamos el split view controller
+        let splitViewController = UISplitViewController()
+        splitViewController.viewControllers = [houseListNavigation, houseDetailNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
         
         //Asignamos el rootViewController
-        window?.rootViewController = houseListViewController.wrappedInNavigation()
+        window?.rootViewController = splitViewController
         
         return true
     }

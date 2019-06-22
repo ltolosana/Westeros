@@ -16,7 +16,7 @@ final class HouseDetailViewController: UIViewController {
     @IBOutlet private weak var wordsLabel: UILabel!
     
     // MARK: - Properties
-    private let model: House
+    private var model: House
     
     
     // MARK: - Initialization
@@ -90,10 +90,21 @@ extension HouseDetailViewController {
     @objc private func displayMembers() {
         // TODO: Hacer para el jueves
         // LMT - Creo el membersVC
-        let membersViewController = MemberListViewController(model: model.sortedMembers)
+        // Xandre lo ha hecho igual que yo
+        let memberListViewController = MemberListViewController(model: model.sortedMembers)
         
         // LMT - Lo muestro mediante un push
-        navigationController?.pushViewController(membersViewController, animated: true)
+        navigationController?.pushViewController(memberListViewController, animated: true)
         
     }
 }
+
+// MARK: - House List View Controller Delegate
+extension HouseDetailViewController: HouseListViewControllerDelegate {
+    func houseListViewController(_ viewController: HouseListViewController, didSelectHouse house: House) {
+        
+        model = house
+        syncModelWithView()
+    }
+}
+

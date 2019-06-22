@@ -8,10 +8,29 @@
 
 import UIKit
 
+// let HOUSE_KEY: String = "HouseKey"
+// let HOUSE_DID_CHANGE_NOTIFICATION_NAME: String = "HouseDidChangeNotificationName"
+// let LAST_HOUSE_KEY = "LastHouseKey"
+
+protocol HouseListViewControllerDelegate: class { // Lo del : class es por lo de weak del delegado  de mas abajo
+    
+    // should
+    // will
+    // did
+    
+    func houseListViewController(_ viewController: HouseListViewController, didSelectHouse house: House)
+}
+
 class HouseListViewController: UITableViewController {
+    
+    enum Constants {
+        static let houseKey: String = "HouseKey"
+        static let lastHouseKey = "LastHouseKey"
+    }
     
     // MARK: Properties
     private let model: [House]
+    weak var delegate: HouseListViewControllerDelegate? // Los delegados tiene que ser siempre weak y tenemos que poner en la definicion lo de : class
     
     // MARK: Initialization
     init (model: [House]) {
@@ -69,10 +88,51 @@ class HouseListViewController: UITableViewController {
         // Averiguar que casa se ha pulsado
         let house = model[indexPath.row]
         
-        // Crear el VC de la casa
-        let houseDetailViewController = HouseDetailViewController(model: house)
+//        // Crear el VC de la casa
+//        let houseDetailViewController = HouseDetailViewController(model: house)
+//
+//        // Mostrarlo
+//        navigationController?.pushViewController(houseDetailViewController, animated: true)
         
-        // Mostrarlo
-        navigationController?.pushViewController(houseDetailViewController, animated: true)
+        // Cambiamos lo anterior y usamos el protocolo de delegado
+        // Avisar al delegado
+        // Enviamos la informacion de que se ha seleccionado una casa
+        delegate?.houseListViewController(self, didSelectHouse: house)
+
+        // Mandamos la misma informacion a traves de las notifications
+        let notificationCenter = NotificationCenter.default
+        
+        let dictionary = [Constants.houseKey: house]
+        
+        let notification = Notification(
+            name: .houseDidNotificationName,
+            object: self,
+            userInfo: dictionary
+        )
+        
+        notificationCenter.post(notification)
+        
+        // Guardar la ultima casa seleccionada
+        saveLastSelectedHouse(at: indexPath.row)
+        
+    }
+}
+
+extension HouseListViewController {
+    
+    private func saveLastSelectedHouse(at index: Int) {
+        // Escribimos en UserDefaults
+        let userDefaults = UserDefaults.standard // Es un singleton
+        userDefaults.set(index, forKey: Constants.lastHouseKey)
+        userDefaults.synchronize() // Desde hace unas versiones de iOS ya no es necesario pero lo hacemos por si acaso
+    }
+    
+    func lastSelectedHouse() -> House {
+        // Leer de User Defaults
+        let userDefaults = UserDefaults.standard
+        let lastIndex = userDefaults.integer(forKey: Constants.lastHouseKey) // El metodo "integer" de UserDefaults, si no existe la clave, devuelve 0
+        
+        // Devolvemos la casa
+        return model[lastIndex]
     }
 }
