@@ -33,6 +33,7 @@
 		60C94C9122B031960014744A /* PersonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C94C9022B031960014744A /* PersonTests.swift */; };
 		60C94C9322B0324B0014744A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C94C9222B0324B0014744A /* Person.swift */; };
 		60CDB35022BC3A8C005E0073 /* NotificationName+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */; };
+		60DA17F122C2C75E00A679A2 /* String+toDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DA17F022C2C75E00A679A2 /* String+toDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		60C94C9022B031960014744A /* PersonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTests.swift; sourceTree = "<group>"; };
 		60C94C9222B0324B0014744A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Addition.swift"; sourceTree = "<group>"; };
+		60DA17F022C2C75E00A679A2 /* String+toDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toDate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				6086092022B2F8BD005A2BD4 /* UIViewController+Navigation.swift */,
 				60CDB34F22BC3A8C005E0073 /* NotificationName+Addition.swift */,
 				60821F3622BE4D6A00AF1476 /* Date+FromString.swift */,
+				60DA17F022C2C75E00A679A2 /* String+toDate.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				60C0E13422AF0B2300E72CD3 /* AppDelegate.swift in Sources */,
 				60528D6122B96C9B00C21017 /* WikiViewController.swift in Sources */,
 				60821F3722BE4D6A00AF1476 /* Date+FromString.swift in Sources */,
+				60DA17F122C2C75E00A679A2 /* String+toDate.swift in Sources */,
 				60C94C9322B0324B0014744A /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

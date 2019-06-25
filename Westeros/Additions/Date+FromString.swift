@@ -8,13 +8,15 @@
 
 import Foundation
 
-extension Date {
-    
-    func fromString(_ dateString: String) -> Date {
-        let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = "dd/MM/yyyy"
-        guard let dateFromString = dateStringFormatter.date(from: dateString) else { return Date() }
-        return dateFromString
-    }
-}
+//extension Date {
+//
+//    func fromString(_ dateString: String) -> Date {
+//        let dateStringFormatter = DateFormatter()
+//        dateStringFormatter.dateFormat = "dd/MM/yyyy"
+////        guard let dateFromString = dateStringFormatter.date(from: dateString) else { return Date() }
+//        let dateFromString = dateStringFormatter.date(from: dateString)
+//        print(dateFromString!)
+//        return dateFromString!
+//    }
+//}
 
