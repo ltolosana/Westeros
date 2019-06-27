@@ -8,23 +8,41 @@
 
 import Foundation
 
-// TODO: Cambiar esto a un set de Episodios y no de Strings
-typealias Episodes = Set<String>
+typealias Episodes = Set<Episode>
 
 final class Season {
     let name: String
     let firstAired: Date
-    let episodes: Episodes
+    var episodes: Episodes
     
     init(name: String, firstAired: Date, episodes: Episodes) {
         self.name = name
         self.firstAired = firstAired
         self.episodes = episodes
     }
+}
+
+extension Season {
+    var count: Int {
+        return episodes.count
+    }
     
-    // TODO: Debo revisar lo de las referencias entre Season y Episode y hacerlo como en House y Person, solo que aqui sera Episode quien se parezca a House, en el sendido de tener que añadir a posteriori loa temporada a la que pertenece el episodio
+    var sortedEpisodes: [Episode] {
+        return episodes.sorted()
+    }
     
-    // Es decir para crear la season debo tener ya un episodio, y cuando ya tengo la season es cuando le digo al episodio a que season pertenece (por eso es opcional)
+    func add(episode: Episode) {
+        // Solo puedo añadir el episodio si no esta asignado a ninguna temporada
+        // Y como es un Set no puede haber episodios duplicados
+        if episode.season == nil {
+            episodes.insert(episode)
+        }
+    }
+    
+    func add(episodes: Episode...) {
+        episodes.forEach { add(episode: $0) }
+    }
+
 }
 
 extension Season {
@@ -62,7 +80,9 @@ extension Season: CustomStringConvertible {
         dateFormatter.dateStyle = .short
         dateFormatter.locale = Locale(identifier: "es_ES")
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let listaEpisodios = episodes.map{ $0 }
-        return "Temporada: \(name), con fecha de primera emision el dia: \(dateFormatter.string(from: firstAired)), cuyos episodios son: \(listaEpisodios.description)"
+//        let listaEpisodios = episodes.sorted().map{ $0.title }
+//        print(listaEpisodios)
+//        return "Temporada: \(name), con fecha de primera emision el dia: \(dateFormatter.string(from: firstAired)), y que tiene \(count) episodios llamados: \(episodes.sorted().map{ $0.title })."
+        return "Temporada: \(name), con fecha de primera emision el dia: \(dateFormatter.string(from: firstAired)), y que tiene \(count) episodios."
      }
 }

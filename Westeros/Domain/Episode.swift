@@ -18,8 +18,14 @@ final class Episode {
         self.firstAired = firstAired
         self.season = season
     }
-    //TODO: Debo revisar esto de las referencias entre season y episode
-    // VEr lo que he puesto en Season
+}
+
+extension Episode {
+    func add(season: Season) {
+        if season.episodes.contains(self){
+            self.season = season
+        }
+    }
 }
 
 extension Episode {
