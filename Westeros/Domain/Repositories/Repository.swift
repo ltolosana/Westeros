@@ -24,11 +24,15 @@ protocol HouseFactory {
 
 protocol SeasonFactory {
     var seasons: [Season] { get}
-    
+   
+    typealias SeasonFilter = (Season) -> Bool
+    func seasons(filteredBy: SeasonFilter) -> [Season]
+
 }
 
 final class LocalFactory: HouseFactory, SeasonFactory {
     
+    // MARK: - HouseFactory
     var houses: [House] {
         
         // Me creo las casas
@@ -91,10 +95,11 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         return houses.filter(theFilter)
     }
     
-    // Ejercicio 3
+    
+    // MARK: - Ejercicio 3 SeasonFactory
     var seasons: [Season] {
         
-        // Temporada 1
+        // MARK: Temporada 1
         let s01E01Aired = "17/04/2011"
         let s01E02Aired = "24/04/2011"
         let s01Aired = "17/04/2011"
@@ -119,7 +124,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s01E02.add(season: s01)
         
 
-        // Temporada 2
+        // MARK: Temporada 2
         let s02E01Aired = "01/04/2012"
         let s02E02Aired = "08/04/2012"
         let s02Aired = "01/04/2012"
@@ -144,7 +149,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s02E02.add(season: s02)
         
         
-        // Temporada 3
+        // MARK: Temporada 3
         let s03E01Aired = "31/03/2013"
         let s03E02Aired = "07/04/2013"
         let s03Aired = "31/03/2013"
@@ -169,7 +174,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s03E02.add(season: s03)
 
         
-        // Temporada 4
+        // MARK: Temporada 4
         let s04E01Aired = "06/04/2014"
         let s04E02Aired = "13/04/2014"
         let s04Aired = "06/04/2014"
@@ -194,7 +199,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s04E02.add(season: s04)
 
         
-        // Temporada 5
+        // MARK: Temporada 5
         let s05E01Aired = "12/04/2015"
         let s05E02Aired = "19/04/2015"
         let s05Aired = "12/04/2015"
@@ -219,7 +224,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s05E02.add(season: s05)
 
         
-        // Temporada 6
+        // MARK: Temporada 6
         let s06E01Aired = "24/04/2016"
         let s06E02Aired = "01/05/2016"
         let s06Aired = "24/04/2016"
@@ -244,7 +249,7 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         s06E02.add(season: s06)
 
         
-        // Temporada 7
+        // MARK: Temporada 7
         let s07E01Aired = "16/07/2017"
         let s07E02Aired = "23/07/2017"
         let s07Aired = "16/07/2017"
@@ -270,6 +275,10 @@ final class LocalFactory: HouseFactory, SeasonFactory {
 
         
         return [s01, s02, s03, s04, s05, s06, s07].sorted()
+    }
+
+    func seasons(filteredBy theFilter: (Season) -> Bool) -> [Season] {
+        return seasons.filter(theFilter)
     }
 
     

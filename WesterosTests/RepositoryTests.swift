@@ -59,4 +59,36 @@ class RepositoryTests: XCTestCase {
         let list = Repository.local.houses(filteredBy: { $0.words == "Se acerca el verano" })
         XCTAssertEqual(list.count, 0)
     }
+    
+    func testLocalFactoryHasSeasons() {
+        let seasons = Repository.local.seasons
+        XCTAssertNotNil(seasons)
+    }
+    
+    func testLocalFactoryHasTheCorrectSeasonCount() {
+        let seasons = Repository.local.seasons
+        XCTAssertEqual(seasons.count, 7)
+    }
+    
+    func testLocalRepositoryReturnsSortedArrayOfSeasons() {
+        let seasons = Repository.local.seasons
+        XCTAssertEqual(seasons, seasons.sorted())
+    }
+
+    func testLocalRepositorySeasonFiltering() {
+        //let filteredSeasonList = Repository.local.seasons(filteredBy: { $0.count == 1 })
+        let filteredSeasonList = Repository.local.seasons(filteredBy: { season in
+            season.count == 2
+        })
+        XCTAssertEqual(filteredSeasonList.count, 7)
+        
+        let filteredSeasonList2 = Repository.local.seasons(filteredBy: { $0.name.lowercased() == "temporada tres" })
+        XCTAssertEqual(filteredSeasonList2.count, 1)
+        
+        let filteredSeasonList3 = Repository.local.seasons { (season) -> Bool in
+            season.name == "Temporada Ocho"
+        }
+        XCTAssertEqual(filteredSeasonList3.count, 0)
+        
+    }
 }
