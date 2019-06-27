@@ -22,7 +22,12 @@ protocol HouseFactory {
     func houses(filteredBy: HouseFilter) -> [House]
 }
 
-final class LocalFactory: HouseFactory {
+protocol SeasonFactory {
+    var seasons: [Season] { get}
+    
+}
+
+final class LocalFactory: HouseFactory, SeasonFactory {
     
     var houses: [House] {
         
@@ -85,4 +90,187 @@ final class LocalFactory: HouseFactory {
     func houses(filteredBy theFilter: (House) -> Bool) -> [House] {
         return houses.filter(theFilter)
     }
+    
+    // Ejercicio 3
+    var seasons: [Season] {
+        
+        // Temporada 1
+        let s01E01Aired = "17/04/2011"
+        let s01E02Aired = "24/04/2011"
+        let s01Aired = "17/04/2011"
+        
+        let s01E01 = Episode(
+            title: "Se acerca el Invierno",
+            firstAired: s01E01Aired.toDate()
+        )
+        
+        let s01E02 = Episode(
+            title: "El Camino Real",
+            firstAired: s01E02Aired.toDate()
+        )
+        
+        let s01 = Season(
+            name: "Temporada Uno",
+            firstAired: s01Aired.toDate(),
+            episodes: [s01E01, s01E02]
+        )
+        
+        s01E01.add(season: s01)
+        s01E02.add(season: s01)
+        
+
+        // Temporada 2
+        let s02E01Aired = "01/04/2012"
+        let s02E02Aired = "08/04/2012"
+        let s02Aired = "01/04/2012"
+
+        let s02E01 = Episode(
+            title: "El Norte no olvida",
+            firstAired: s02E01Aired.toDate()
+        )
+
+        let s02E02 = Episode(
+            title: "Las Tierras de la Noche",
+            firstAired: s02E02Aired.toDate()
+        )
+
+        let s02 = Season(
+            name: "Temporada Dos",
+            firstAired: s02Aired.toDate(),
+            episodes: [s02E01, s02E02]
+        )
+        
+        s02E01.add(season: s02)
+        s02E02.add(season: s02)
+        
+        
+        // Temporada 3
+        let s03E01Aired = "31/03/2013"
+        let s03E02Aired = "07/04/2013"
+        let s03Aired = "31/03/2013"
+        
+        let s03E01 = Episode(
+            title: "Valar Dohaeris",
+            firstAired: s03E01Aired.toDate()
+        )
+        
+        let s03E02 = Episode(
+            title: "Alas negras, palabras negras",
+            firstAired: s03E02Aired.toDate()
+        )
+        
+        let s03 = Season(
+            name: "Temporada Tres",
+            firstAired: s03Aired.toDate(),
+            episodes: [s03E01, s03E02]
+        )
+        
+        s03E01.add(season: s03)
+        s03E02.add(season: s03)
+
+        
+        // Temporada 4
+        let s04E01Aired = "06/04/2014"
+        let s04E02Aired = "13/04/2014"
+        let s04Aired = "06/04/2014"
+        
+        let s04E01 = Episode(
+            title: "Dos espadas",
+            firstAired: s04E01Aired.toDate()
+        )
+        
+        let s04E02 = Episode(
+            title: "El leon y la rosa",
+            firstAired: s04E02Aired.toDate()
+        )
+        
+        let s04 = Season(
+            name: "Temporada Cuatro",
+            firstAired: s04Aired.toDate(),
+            episodes: [s04E01, s04E02]
+        )
+        
+        s04E01.add(season: s04)
+        s04E02.add(season: s04)
+
+        
+        // Temporada 5
+        let s05E01Aired = "12/04/2015"
+        let s05E02Aired = "19/04/2015"
+        let s05Aired = "12/04/2015"
+        
+        let s05E01 = Episode(
+            title: "Las guerras venideras",
+            firstAired: s05E01Aired.toDate()
+        )
+        
+        let s05E02 = Episode(
+            title: "La Casa de Negro y Blanco",
+            firstAired: s05E02Aired.toDate()
+        )
+        
+        let s05 = Season(
+            name: "Temporada Cinco",
+            firstAired: s05Aired.toDate(),
+            episodes: [s05E01, s05E02]
+        )
+        
+        s05E01.add(season: s05)
+        s05E02.add(season: s05)
+
+        
+        // Temporada 6
+        let s06E01Aired = "24/04/2016"
+        let s06E02Aired = "01/05/2016"
+        let s06Aired = "24/04/2016"
+        
+        let s06E01 = Episode(
+            title: "La mujer roja",
+            firstAired: s06E01Aired.toDate()
+        )
+        
+        let s06E02 = Episode(
+            title: "A casa",
+            firstAired: s06E02Aired.toDate()
+        )
+        
+        let s06 = Season(
+            name: "Temporada Seis",
+            firstAired: s06Aired.toDate(),
+            episodes: [s06E01, s06E02]
+        )
+        
+        s06E01.add(season: s06)
+        s06E02.add(season: s06)
+
+        
+        // Temporada 7
+        let s07E01Aired = "16/07/2017"
+        let s07E02Aired = "23/07/2017"
+        let s07Aired = "16/07/2017"
+        
+        let s07E01 = Episode(
+            title: "Rocadragon",
+            firstAired: s07E01Aired.toDate()
+        )
+        
+        let s07E02 = Episode(
+            title: "Bajo la tormenta",
+            firstAired: s07E02Aired.toDate()
+        )
+        
+        let s07 = Season(
+            name: "Temporada Siete",
+            firstAired: s07Aired.toDate(),
+            episodes: [s07E01, s07E02]
+        )
+        
+        s07E01.add(season: s07)
+        s07E02.add(season: s07)
+
+        
+        return [s01, s02, s03, s04, s05, s06, s07].sorted()
+    }
+
+    
 }
