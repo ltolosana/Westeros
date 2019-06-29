@@ -42,10 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let houseListViewController = HouseListViewController(model: houses)
         let seasonListVC = SeasonListViewController(model: seasons)
         
-        // Prueba
-        let episodeListVC = EpisodeListViewController(model: seasons[0].sortedEpisodes)
-        // Fin prueba
-        
         
         let lastSelectedHouse = houseListViewController.lastSelectedHouse()
         let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse)
@@ -58,9 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
         
         let seasonListNavigation = seasonListVC.wrappedInNavigation()
-        // Prueba
-        let episodeListNavigation = episodeListVC.wrappedInNavigation()
-        // Fin de prueba
         
         // Creamos el split view controller
         let splitViewController = UISplitViewController()
@@ -68,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Asignamos el rootViewController
 //        window?.rootViewController = splitViewController
-        window?.rootViewController = episodeListNavigation
+        window?.rootViewController = seasonListNavigation
         
         return true
     }

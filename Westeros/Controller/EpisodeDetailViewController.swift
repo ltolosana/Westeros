@@ -51,7 +51,7 @@ extension EpisodeDetailViewController {
         
         episodeTitleLabel.text = "Capitulo: \(model.title)"
         if let season = model.season {
-            episodeSeasonLabel.text = "Correspondiente a la \(season.name))"
+            episodeSeasonLabel.text = "Correspondiente a la \(season.name)"
         } else {
             episodeSeasonLabel.text = "Debo mirar a ver por que esto no va"
         }

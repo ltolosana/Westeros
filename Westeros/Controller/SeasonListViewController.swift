@@ -61,6 +61,8 @@ class SeasonListViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
+            cell?.accessoryType = UITableViewCell.AccessoryType.detailButton
+            
         }
         
         // SIncronizamos modelo (season) y vista (celda)
@@ -80,6 +82,17 @@ class SeasonListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Averiguar que Temporada se ha pulsado
+        let season = model[indexPath.row]
+        
+        // Crear el VC de la lista de capitulos de la temporada
+        let episodeListViewController = EpisodeListViewController(model: season.sortedEpisodes, seasonName: season.name)
+        
+        // Y lo mostramos
+        navigationController?.pushViewController(episodeListViewController, animated: true)
+
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let season = model[indexPath.row]
         
         // Crear el VC del detalle Temporada

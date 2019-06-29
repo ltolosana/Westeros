@@ -14,10 +14,11 @@ class EpisodeListViewController: UITableViewController {
     private let model: [Episode]
     
     // MARK: - Initialization
-    init (model: [Episode]) {
+    init (model: [Episode], seasonName: String) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        title = "Mostrar aqui la temporada que corresponde"
+//        title = "Mostrar aqui la temporada que corresponde"
+        title = seasonName
     }
     
     required init?(coder aDecoder: NSCoder) {
