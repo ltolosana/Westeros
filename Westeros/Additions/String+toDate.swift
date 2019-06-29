@@ -14,6 +14,7 @@ extension String {
         dateStringFormatter.dateFormat = "dd/MM/yyyy"
         //        dateStringFormatter.locale = Locale(identifier: "es_ES")
         //        dateStringFormatter.timeZone = TimeZone.current
+                dateStringFormatter.timeZone = TimeZone(abbreviation: "GMT")
         guard let dateFromString = dateStringFormatter.date(from: self)
             else { return Date() }
         print(dateFromString)

@@ -24,19 +24,16 @@ class EpisodeTests: XCTestCase {
         
         s01E01 = Episode(
             title: "Se acerca el Invierno",
-//            firstAired: dateFromString(s01E01Aired),
             firstAired: s01E01Aired.toDate()
         )
         
         s01E02 = Episode(
             title: "El Camino Real",
-//            firstAired: Date().fromString(s01E02Aired),
             firstAired: s01E02Aired.toDate()
         )
         
         s01 = Season(
             name: "Temporada Uno",
-            //            firstAired: dateFromString(s01Aired),
             firstAired: s01Aired.toDate(),
             episodes: [s01E01, s01E02]
         )
