@@ -30,19 +30,58 @@ class EpisodeDetailViewController: UIViewController {
     }
     
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        syncModelWithView()
+        subscribeToNotifications()
+    }
     
 
-    override func viewWillAppear(_ animated: Bool) {
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        //        setupUI()
+//        syncModelWithView()
+//    }
+
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        setupUI()
+        unsubscribeNotifications()
+    }
+
+}
+
+extension EpisodeDetailViewController {
+    private func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(seasonDidChange),
+            name: .seasonDidNotificationName,
+            object: nil
+        )
+    }
+    
+    private func unsubscribeNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
+    @objc private func seasonDidChange(notification: Notification) {
+        // Averiguo la temporada
+        guard let dictionary = notification.userInfo else { return }
+        guard let season = dictionary[SeasonListViewController.Constants.seasonKey] as? Season else { return }
+        
+        // Cambio de temporada (actualizo el modelo)
+        model = season.sortedEpisodes[0]
+        
+        // Sincronizo y salgo de la vista de detalle
         syncModelWithView()
+        navigationController?.popViewController(animated: true)
+        
     }
 }
+
 
 extension EpisodeDetailViewController {
     private func syncModelWithView() {

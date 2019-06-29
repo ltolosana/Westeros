@@ -11,7 +11,9 @@ import UIKit
 class EpisodeListViewController: UITableViewController {
     
     // MARK: - Properties
-    private let model: [Episode]
+    private var model: [Episode]
+    
+//    private var table: UITableView?
     
     // MARK: - Initialization
     init (model: [Episode], seasonName: String) {
@@ -25,15 +27,21 @@ class EpisodeListViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: - Life Cycle
+    
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
+    
+//    extension SeasonListViewController {
+//        private func syncModelWithView() {
+//        
+//        }
+//    }
+    
+    
 
     // MARK: - Table view data source
 
@@ -90,4 +98,18 @@ class EpisodeListViewController: UITableViewController {
      
     }
     
+}
+
+
+// MARK: - Season List View Controller Delegate
+extension EpisodeListViewController: SeasonListViewControllerDelegate {
+    func seasonListViewController(_ viewController: SeasonListViewController, didSelectSeason season: Season) {
+        // Sincronizo vista y modelo
+        // En este caso actualizo el modelo con los episodios de la nueva temporada seleccionada y actualizo tambien el titulo con el nombre de la temporada
+        model = season.sortedEpisodes
+        title = season.name
+//        syncModelWithView()
+        // Recargo la tabla para que actualice los datos del modelo
+        tableView.reloadData()
+    }
 }

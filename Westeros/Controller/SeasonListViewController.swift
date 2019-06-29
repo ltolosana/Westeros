@@ -8,10 +8,20 @@
 
 import UIKit
 
+protocol SeasonListViewControllerDelegate: class {
+    func seasonListViewController(_ viewController: SeasonListViewController,  didSelectSeason season: Season)
+}
+
 class SeasonListViewController: UITableViewController {
     
+    enum Constants {
+        static let seasonKey: String = "SeasonKey"
+        static let lastSeasonKey = "LastSeasonKey"
+    }
+
     // MARK: Properties
     private let model: [Season]
+    weak var delegate: SeasonListViewControllerDelegate?
     
     
     // MARK: Initialization
@@ -84,12 +94,19 @@ class SeasonListViewController: UITableViewController {
         // Averiguar que Temporada se ha pulsado
         let season = model[indexPath.row]
         
-        // Crear el VC de la lista de capitulos de la temporada
-        let episodeListViewController = EpisodeListViewController(model: season.sortedEpisodes, seasonName: season.name)
+        // Le aviso a mi delegado que se ha pulsado una Temporada
+        delegate?.seasonListViewController(self, didSelectSeason: season)
         
-        // Y lo mostramos
-        navigationController?.pushViewController(episodeListViewController, animated: true)
-
+        // Y ademas aviso por notificacion
+        
+        let notificationCenter = NotificationCenter.default
+        
+        let dictionary = [Constants.seasonKey: season]
+        
+        let notification = Notification(name: .seasonDidNotificationName, object: self, userInfo: dictionary)
+        
+        notificationCenter.post(notification)
+        
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {

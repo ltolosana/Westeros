@@ -40,28 +40,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Creamos los controladores
         let houseListViewController = HouseListViewController(model: houses)
-        let seasonListVC = SeasonListViewController(model: seasons)
+        let seasonListViewController = SeasonListViewController(model: seasons)
         
         
         let lastSelectedHouse = houseListViewController.lastSelectedHouse()
         let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse)
         
+        
+//        let seasonDetailViewController = SeasonDetailViewController(model: seasons[0])
+        let episodeListViewController = EpisodeListViewController(model: seasons[0].sortedEpisodes, seasonName: seasons[0].name)
+        
         // Asignamos delegados
         houseListViewController.delegate = houseDetailViewController
+        seasonListViewController.delegate = episodeListViewController
+        
         
         // Los envolvemos en Navigations
         let houseListNavigation = houseListViewController.wrappedInNavigation()
         let houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
         
-        let seasonListNavigation = seasonListVC.wrappedInNavigation()
+        let seasonListNavigation = seasonListViewController.wrappedInNavigation()
+//        let seassonDetailNavigation = seasonDetailViewController.wrappedInNavigation()
+        let episodeListNavigation = episodeListViewController.wrappedInNavigation()
+
+//
+//        let vacioVC = UIViewController()
+//        vacioVC.splitViewController = episodeListNavigation
+//
+        
+        
+        // Creo el combinador TabBar con el houseList y el seasonList
+//        let tabbarController = UITabBarController()
+//        tabbarController.viewControllers = [houseListNavigation, seasonListNavigation]
         
         // Creamos el split view controller
         let splitViewController = UISplitViewController()
-        splitViewController.viewControllers = [houseListNavigation, houseDetailNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
+//        splitViewController.viewControllers = [houseListNavigation, houseDetailNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
+        splitViewController.viewControllers = [seasonListNavigation, episodeListNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
         
         //Asignamos el rootViewController
 //        window?.rootViewController = splitViewController
-        window?.rootViewController = seasonListNavigation
+        window?.rootViewController = splitViewController
         
         return true
     }
