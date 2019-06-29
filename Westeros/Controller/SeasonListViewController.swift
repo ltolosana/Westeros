@@ -115,9 +115,14 @@ class SeasonListViewController: UITableViewController {
         // Crear el VC del detalle Temporada
         let seasonDetailViewController = SeasonDetailViewController(model: season)
         
-        // Y lo mostramos
-        navigationController?.pushViewController(seasonDetailViewController, animated: true)
+//        // Y lo mostramos
+//        navigationController?.pushViewController(seasonDetailViewController, animated: true)
 
+        
+        // Lo mostramos de forma modal
+        let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        seasonDetailViewController.modalTransitionStyle = modalStyle
+        self.present(seasonDetailViewController, animated: true, completion: nil)
     }
     
 }

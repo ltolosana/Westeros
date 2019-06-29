@@ -14,6 +14,10 @@ class SeasonDetailViewController: UIViewController {
     @IBOutlet weak var seasonNameLabel: UILabel!
     @IBOutlet weak var firstAiredLabel: UILabel!
     
+    @IBAction func cerrar(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Properties
     private var model: Season
 
@@ -22,6 +26,7 @@ class SeasonDetailViewController: UIViewController {
         self.model = model
         super.init(nibName: nil, bundle: nil)
         title = model.name
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

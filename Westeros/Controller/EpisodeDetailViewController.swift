@@ -30,22 +30,23 @@ class EpisodeDetailViewController: UIViewController {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        syncModelWithView()
+//        subscribeToNotifications()
+//    }
+    
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //        setupUI()
         syncModelWithView()
         subscribeToNotifications()
     }
-    
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        //        setupUI()
-//        syncModelWithView()
-//    }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         unsubscribeNotifications()
     }
 

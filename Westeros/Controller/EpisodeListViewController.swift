@@ -95,7 +95,7 @@ class EpisodeListViewController: UITableViewController {
         
         // Y lo mostramos
         navigationController?.pushViewController(episodeDetailViewController, animated: true)
-     
+
     }
     
 }
