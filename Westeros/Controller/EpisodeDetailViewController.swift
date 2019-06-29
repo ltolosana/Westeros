@@ -1,5 +1,5 @@
 //
-//  SeasonDetailViewController.swift
+//  EpisodeDetailViewController.swift
 //  Westeros
 //
 //  Created by Luis Maria Tolosana Simon on 29/06/2019.
@@ -8,20 +8,21 @@
 
 import UIKit
 
-class SeasonDetailViewController: UIViewController {
+class EpisodeDetailViewController: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet weak var seasonNameLabel: UILabel!
+    @IBOutlet weak var episodeTitleLabel: UILabel!
+    @IBOutlet weak var episodeSeasonLabel: UILabel!
     @IBOutlet weak var firstAiredLabel: UILabel!
-    
+   
     // MARK: - Properties
-    private var model: Season
-
+    private var model: Episode
+    
     // MARK: - Initialization
-    init(model: Season) {
+    init(model: Episode) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        title = model.name
+        title = model.title
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,22 +36,26 @@ class SeasonDetailViewController: UIViewController {
 //        // Do any additional setup after loading the view.
 //    }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setupUI()
+        //        setupUI()
         syncModelWithView()
     }
 }
 
-extension SeasonDetailViewController {
+extension EpisodeDetailViewController {
     private func syncModelWithView() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-            
-        seasonNameLabel.text = "Temporada: \(model.name)"
+        
+        episodeTitleLabel.text = "Capitulo: \(model.title)"
+        if let season = model.season {
+            episodeSeasonLabel.text = "Correspondiente a la \(season.name))"
+        } else {
+            episodeSeasonLabel.text = "Debo mirar a ver por que esto no va"
+        }
         firstAiredLabel.text = "Fecha Emisión: \(dateFormatter.string(from: model.firstAired))"
+        
     }
 }
-
-
-

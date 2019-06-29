@@ -1,5 +1,5 @@
 //
-//  SeasonListViewController.swift
+//  EpisodeListViewController.swift
 //  Westeros
 //
 //  Created by Luis Maria Tolosana Simon on 29/06/2019.
@@ -8,24 +8,21 @@
 
 import UIKit
 
-class SeasonListViewController: UITableViewController {
+class EpisodeListViewController: UITableViewController {
     
-    // MARK: Properties
-    private let model: [Season]
+    // MARK: - Properties
+    private let model: [Episode]
     
-    
-    // MARK: Initialization
-    init (model: [Season]) {
+    // MARK: - Initialization
+    init (model: [Episode]) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        title = "Westeros - Temporadas"
+        title = "Mostrar aqui la temporada que corresponde"
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +34,6 @@ class SeasonListViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    
-    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,48 +41,52 @@ class SeasonListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         return model.count
     }
 
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellId = "SeasonCell"
+        let cellId = "EpisodeCell"
         
-        // Miramos a ver la season que tenemos que mostrar
-        let season = model[indexPath.row]
+        // Miramos el episodio que hay que mostrar
+        let episode = model[indexPath.row]
         
-        // Creamos una celda
+        // Creamos la celda
         var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
         }
         
-        // SIncronizamos modelo (season) y vista (celda)
+        // Sincronizamos modelo (episode) y vist (celda)
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-        cell?.textLabel?.text = season.name
-        cell?.detailTextLabel?.text = "Fecha Emisión: \(dateFormatter.string(from: season.firstAired))"
-        
+
+        cell?.textLabel?.text = episode.title
+        cell?.detailTextLabel?.text = "Fecha de Emisión: \(dateFormatter.string(from: episode.firstAired))"
+
         // Devolvemos la celda
+
         return cell!
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
+
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Averiguar que Temporada se ha pulsado
-        let season = model[indexPath.row]
+        // Averiguamos que Episodio se ha pussado
+        let episode = model[indexPath.row]
         
-        // Crear el VC del detalle Temporada
-        let seasonDetailViewController = SeasonDetailViewController(model: season)
+        // Creamos el VC del detalle de Episodio
+        let episodeDetailViewController = EpisodeDetailViewController(model: episode)
         
         // Y lo mostramos
-        navigationController?.pushViewController(seasonDetailViewController, animated: true)
-
+        navigationController?.pushViewController(episodeDetailViewController, animated: true)
+     
     }
     
 }
