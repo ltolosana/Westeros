@@ -13,6 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var houseListNavigation: UINavigationController?
+    var houseDetailNavigation: UINavigationController?
+    
+    var seasonListNavigation: UINavigationController?
+    var episodeListNavigation: UINavigationController?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -56,27 +62,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Los envolvemos en Navigations
-        let houseListNavigation = houseListViewController.wrappedInNavigation()
-        let houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
+        houseListNavigation = houseListViewController.wrappedInNavigation()
+        houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
         
-        let seasonListNavigation = seasonListViewController.wrappedInNavigation()
+        seasonListNavigation = seasonListViewController.wrappedInNavigation()
 //        let seassonDetailNavigation = seasonDetailViewController.wrappedInNavigation()
-        let episodeListNavigation = episodeListViewController.wrappedInNavigation()
-
-//
-//        let vacioVC = UIViewController()
-//        vacioVC.splitViewController = episodeListNavigation
-//
+        episodeListNavigation = episodeListViewController.wrappedInNavigation()
         
         
         // Creo el combinador TabBar con el houseList y el seasonList
-//        let tabbarController = UITabBarController()
-//        tabbarController.viewControllers = [houseListNavigation, seasonListNavigation]
+        let tabbarController = UITabBarController()
+        tabbarController.viewControllers = [houseListNavigation!, seasonListNavigation!]
+        tabbarController.delegate = self
         
         // Creamos el split view controller
         let splitViewController = UISplitViewController()
 //        splitViewController.viewControllers = [houseListNavigation, houseDetailNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
-        splitViewController.viewControllers = [seasonListNavigation, episodeListNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
+//        splitViewController.viewControllers = [seasonListNavigation, episodeListNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
+        splitViewController.viewControllers = [tabbarController, houseDetailNavigation!] // El primero que metes en el array es el Master y el segundo es el Detail
         
         //Asignamos el rootViewController
 //        window?.rootViewController = splitViewController
@@ -108,5 +111,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch viewController {
+        case houseListNavigation:
+            tabBarController.splitViewController?.viewControllers[1] = houseDetailNavigation!
+        case seasonListNavigation:
+            tabBarController.splitViewController?.viewControllers[1] = episodeListNavigation!
+        default:
+            print("defecto")
+        }
+    }
 }
 
