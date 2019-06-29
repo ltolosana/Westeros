@@ -20,8 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        // Crear el modelo
+        // Crear los modelos
         let houses = Repository.local.houses
+        let seasons = Repository.local.seasons
+        
         
         // Creamos los controladores // Lo metemos directamente en el combinador
 //        var controllers = [UINavigationController]()
@@ -38,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Creamos los controladores
         let houseListViewController = HouseListViewController(model: houses)
+        let seasonListVC = SeasonListViewController(model: seasons)
+        
         
         let lastSelectedHouse = houseListViewController.lastSelectedHouse()
         let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse)
@@ -49,12 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let houseListNavigation = houseListViewController.wrappedInNavigation()
         let houseDetailNavigation = houseDetailViewController.wrappedInNavigation()
         
+        let seasonListNavigation = seasonListVC.wrappedInNavigation()
+        
         // Creamos el split view controller
         let splitViewController = UISplitViewController()
         splitViewController.viewControllers = [houseListNavigation, houseDetailNavigation] // El primero que metes en el array es el Master y el segundo es el Detail
         
         //Asignamos el rootViewController
-        window?.rootViewController = splitViewController
+//        window?.rootViewController = splitViewController
+        window?.rootViewController = seasonListNavigation
         
         return true
     }
