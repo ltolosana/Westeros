@@ -86,6 +86,7 @@ extension EpisodeDetailViewController {
 
 extension EpisodeDetailViewController {
     private func syncModelWithView() {
+        title = model.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         

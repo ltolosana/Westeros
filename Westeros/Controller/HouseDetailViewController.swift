@@ -50,6 +50,7 @@ final class HouseDetailViewController: UIViewController {
 
 extension HouseDetailViewController {
     private func syncModelWithView() {
+        title = model.name
         houseNameLabel.text = "House \(model.name)"
         sigilImageView.image = model.sigil.image
         wordsLabel.text = model.words
@@ -91,7 +92,7 @@ extension HouseDetailViewController {
         // TODO: Hacer para el jueves
         // LMT - Creo el membersVC
         // Xandre lo ha hecho igual que yo
-        let memberListViewController = MemberListViewController(model: model.sortedMembers)
+        let memberListViewController = MemberListViewController(model: model.sortedMembers, houseNamed:model.name)
         
         // LMT - Lo muestro mediante un push
         navigationController?.pushViewController(memberListViewController, animated: true)

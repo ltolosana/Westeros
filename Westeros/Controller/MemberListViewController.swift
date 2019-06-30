@@ -15,13 +15,16 @@ class MemberListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    private let model: [Person]
+    private var model: [Person]
+    private var houseNameOfModel: String
     
     // MARK: - Initialization
-    init(model: [Person]) {
+    init(model: [Person], houseNamed: String) {
         self.model = model
+        self.houseNameOfModel = houseNamed
+        
         super.init(nibName: nil, bundle: nil)
-        title = "Members"
+        title = "Members of House \(houseNameOfModel)"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,7 +38,8 @@ class MemberListViewController: UIViewController {
         // Xandre: OJO. No olvidarse de asignar el dataSource
         tableView.dataSource = self
 //        tableView.delegate = self
-
+        
+        subscribeToNotifications()
 
     }
 
@@ -45,6 +49,11 @@ class MemberListViewController: UIViewController {
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeNotifications()
+    }
 }
 
 // TODO: Implementar/conformarse a los protocolos de delegate y datasource
@@ -111,7 +120,39 @@ extension MemberListViewController: UITableViewDataSource {
         return cell
         
     }
+
+}
+
+extension MemberListViewController {
+    private func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(houseDidChange),
+            name: .houseDidNotificationName,
+            object: nil
+        )
+    }
     
+    private func unsubscribeNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
     
-    
+    @objc private func houseDidChange(notification: Notification) {
+        guard let dictionary = notification.userInfo else { return }
+        guard let house = dictionary[HouseListViewController.Constants.houseKey] as? House else { return }
+        model = house.sortedMembers
+        houseNameOfModel = house.name
+        syncModelWithView()
+    }
+}
+
+extension MemberListViewController {
+    private func syncModelWithView() {
+        title = "Members of House \(houseNameOfModel)"
+        
+//        self.navigationItem.backBarButtonItem?.title = houseNameOfModel   // Esto no funciona porque hay que crear un backbutton propio
+        tableView.reloadData()
+    }
 }

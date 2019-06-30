@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Crear los modelos
         let houses = Repository.local.houses
         let seasons = Repository.local.seasons
-        
+
         
         // Creamos los controladores // Lo metemos directamente en el combinador
 //        var controllers = [UINavigationController]()
