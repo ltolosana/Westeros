@@ -13,10 +13,17 @@ final class Repository {
     static let local = LocalFactory()
 }
 
+enum HouseName: String {
+    case Stark = "Stark"
+    case Lannister = "Lannister"
+    case Targaryen = "Targaryen"
+}
+
 protocol HouseFactory {
     var houses: [House] { get }
     
     func house(named: String) -> House?
+    func house(named: HouseName) -> House?
     
     typealias HouseFilter = (House) -> Bool
     func houses(filteredBy: HouseFilter) -> [House]
@@ -89,6 +96,10 @@ final class LocalFactory: HouseFactory, SeasonFactory {
     func house(named name: String) -> House? {
 //        return houses.filter { $0.name == name }.first
         return houses.first { $0.name.uppercased() == name.uppercased() } // filter + first
+    }
+    
+    func house(named name: HouseName) -> House? {
+        return houses.first { $0.name == name.rawValue}
     }
     
     func houses(filteredBy theFilter: (House) -> Bool) -> [House] {
