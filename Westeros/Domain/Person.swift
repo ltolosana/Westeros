@@ -40,6 +40,10 @@ final class Person {
         self.name = name
         self._alias = alias
         self.house = house
+        
+        // Ejercicio 11. Añado el personaje que estoy creando a la lista de miembros de su casa
+        // Nota: no se yo si esta muy bien hacer esto aqui en un init...
+        self.house.add(person: self)
     }
     
     

@@ -73,22 +73,25 @@ final class LocalFactory: HouseFactory, SeasonFactory {
         )
         
         // Add characters
-        let robb = Person(name: "Robb", alias: "El Joven Lobo", house: starkHouse)
-        let arya = Person(name: "Arya", house: starkHouse)
-        let tyrion = Person(name: "Tyrion", alias: "El Enano", house: lannisterHouse)
-        let jaime  = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
-        let cersei = Person(name: "Cersei", house: lannisterHouse)
-        let dani = Person(name: "Daenerys", alias: "La Madre de Dragones", house: targaryenHouse)
+        let _ = Person(name: "Robb", alias: "El Joven Lobo", house: starkHouse)
+        let _ = Person(name: "Arya", house: starkHouse)
+        let _ = Person(name: "Tyrion", alias: "El Enano", house: lannisterHouse)
+        let _  = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
+        let _ = Person(name: "Cersei", house: lannisterHouse)
+        let _ = Person(name: "Daenerys", alias: "La Madre de Dragones", house: targaryenHouse)
+ 
+        // Ejercicio 11. Dado que he metido en el init de Person que añada el personaje que se esta creando a la lista de miembros de su casa, ya no es necesario hacer aqui esa asignacion, ni individual ni "todos a la vez"
+        // Y claro, como ya no se usan los nombres de las instancias de personaje creado, no hace falta ponerles nombre y se puede reemplazar por el simbolo anonimo
         
 //        starkHouse.add(person: arya)
 //        starkHouse.add(person: robb)
-        starkHouse.add(persons: arya, robb)
+        // starkHouse.add(persons: arya, robb)  // comentado por el ejercicio 11
 //        lannisterHouse.add(person: tyrion)
 //        lannisterHouse.add(person: jaime)
 //        lannisterHouse.add(person: cersei)
-        lannisterHouse.add(persons: tyrion, jaime, cersei)
+        // lannisterHouse.add(persons: tyrion, jaime, cersei)   // comentado por el ejercicio 11
         
-        targaryenHouse.add(person: dani)
+        // targaryenHouse.add(person: dani) // Comentado por el ejercicio 11
         
         return [starkHouse, lannisterHouse, targaryenHouse].sorted()
     }
