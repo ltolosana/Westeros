@@ -37,11 +37,12 @@ class MemberListViewController: UIViewController {
         // LMT - Hecho por mi
         // Xandre: OJO. No olvidarse de asignar el dataSource
         tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.delegate = self
         
         subscribeToNotifications()
 
     }
+    
 
     // LMT - Hecho por mi
 //    override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +53,11 @@ class MemberListViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+//        unsubscribeNotifications()
+    }
+    
+    // Tengo que poner el unsubscribe aqui en el deinit() porque si no, cada vez que desaparece este VC para mostrar el detalle de un personaje, el tableview no se entera si se ha pulsado en otra casa y no se actualiza la lista de miembros
+    deinit {
         unsubscribeNotifications()
     }
 }
@@ -123,6 +129,21 @@ extension MemberListViewController: UITableViewDataSource {
 
 }
 
+extension MemberListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Obtenemos el personaje pulsado
+        let member = model[indexPath.row]
+        
+        // Creamos el VC de detalle de personaje
+        let memberDetailViewController = MemberDetailViewController(model: member)
+  
+        // Lo muestro
+        navigationController?.pushViewController(memberDetailViewController, animated: true)
+    }
+}
+
+
+
 extension MemberListViewController {
     private func subscribeToNotifications() {
         let notificationCenter = NotificationCenter.default
@@ -151,8 +172,9 @@ extension MemberListViewController {
 extension MemberListViewController {
     private func syncModelWithView() {
         title = "Members of House \(houseNameOfModel)"
-        
-//        self.navigationItem.backBarButtonItem?.title = houseNameOfModel   // Esto no funciona porque hay que crear un backbutton propio
+        // Esto es para que se actulice la etiqueta del backButton y muestre el nombre correcto de la casa que se ha seleccionado
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = false
         tableView.reloadData()
     }
 }

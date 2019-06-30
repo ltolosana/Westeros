@@ -23,6 +23,7 @@ class EpisodeDetailViewController: UIViewController {
         self.model = model
         super.init(nibName: nil, bundle: nil)
         title = model.title
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,6 +77,10 @@ extension EpisodeDetailViewController {
         // Cambio de temporada (actualizo el modelo)
         model = season.sortedEpisodes[0]
         
+        // Esto es para que se actulice la etiqueta del backButton y muestre el nombre correcto de la casa que se ha seleccionado
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = false
+
         // Sincronizo y salgo de la vista de detalle
         syncModelWithView()
         navigationController?.popViewController(animated: true)
