@@ -118,6 +118,19 @@ class HouseListViewController: UITableViewController {
     }
 }
 
+// MARK: - House List View Controller Delegate
+extension HouseListViewController: HouseListViewControllerDelegate {
+    func houseListViewController(_ viewController: HouseListViewController, didSelectHouse house: House) {
+        
+        // Creamos el VC de detalle la casa
+        let houseDetailViewController = HouseDetailViewController(model: house)
+
+        // Le hacemos un push para mostrarlo
+        navigationController?.pushViewController(houseDetailViewController, animated: true)
+
+    }
+}
+
 extension HouseListViewController {
     
     private func saveLastSelectedHouse(at index: Int) {

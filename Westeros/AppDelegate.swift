@@ -57,8 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let episodeListViewController = EpisodeListViewController(model: seasons[0].sortedEpisodes, seasonName: seasons[0].name)
         
         // Asignamos delegados
-        houseListViewController.delegate = houseDetailViewController
-        seasonListViewController.delegate = episodeListViewController
+        // en funcion de si estamos en un ipad o un iphone
+        if UIDevice.current.userInterfaceIdiom == .pad { // Si es un ipad los delegados son los que estan a la derecha del splitVC
+            houseListViewController.delegate = houseDetailViewController
+            seasonListViewController.delegate = episodeListViewController
+        } else if UIDevice.current.userInterfaceIdiom == .phone { // Si es un iphone, como no hay split los delegados son ellos mismos
+            houseListViewController.delegate = houseListViewController
+            seasonListViewController.delegate = seasonListViewController
+        }
         
         
         // Los envolvemos en Navigations
@@ -118,9 +124,15 @@ extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         switch viewController {
         case houseListNavigation:
-            tabBarController.splitViewController?.viewControllers[1] = houseDetailNavigation!
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                tabBarController.splitViewController?.viewControllers[1] = houseDetailNavigation!
+            }
+            
         case seasonListNavigation:
-            tabBarController.splitViewController?.viewControllers[1] = episodeListNavigation!
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                tabBarController.splitViewController?.viewControllers[1] = episodeListNavigation!
+            }
+            
         default:
             print("defecto")
         }

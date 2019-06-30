@@ -126,3 +126,15 @@ class SeasonListViewController: UITableViewController {
     }
     
 }
+
+// MARK: - Season List View Controller Delegate
+extension SeasonListViewController: SeasonListViewControllerDelegate {
+    func seasonListViewController(_ viewController: SeasonListViewController, didSelectSeason season: Season) {
+        
+        // Creo el VC con la lista de episodios de la temporada seleccionada
+        let episodeListViewController = EpisodeListViewController(model: season.sortedEpisodes, seasonName: season.name)
+        
+        // Le hago un push para mostrarlo
+        navigationController?.pushViewController(episodeListViewController, animated: true)
+    }
+}
